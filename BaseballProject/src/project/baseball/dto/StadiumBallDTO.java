@@ -99,5 +99,12 @@ public class StadiumBallDTO {
 	public void setpNum(String pNum) {
 		this.pNum = pNum;
 	}
+	//toString
+	@Override
+	public String toString() {
+		return "StadiumBallDTO [sNum=" + sNum + ", sName=" + sName + ", sAddress=" + sAddress + ", occ=" + occ
+				+ ", gCode=" + gCode + ", gDate=" + gDate + ", hTeam=" + hTeam + ", aTeam=" + aTeam + ", weather="
+				+ weather + ", bOrder=" + bOrder + ", bSeatCode=" + bSeatCode + ", HF=" + HF + ", pNum=" + pNum + "]";
+	}
 	
 }
