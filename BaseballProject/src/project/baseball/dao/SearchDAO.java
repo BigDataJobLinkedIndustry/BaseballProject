@@ -1,5 +1,9 @@
 package project.baseball.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class SearchDAO {
 	// 싱글턴 패턴--------------------------------------
 	private static SearchDAO dao = new SearchDAO();
@@ -13,7 +17,9 @@ public class SearchDAO {
 
 	// ----------------------------------------------
 	public void selectStadiumHomeRun() {
-
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 	}
 
 	public void selectStadiumFoul() {
