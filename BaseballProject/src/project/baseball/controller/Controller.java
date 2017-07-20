@@ -1,33 +1,63 @@
 package project.baseball.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project.baseball.service.NextPage;
+import project.baseball.service.UserService;
+
 /**
  * Servlet implementation class Controller
  */
-@WebServlet("/Controller")
+@WebServlet(value="*.project",
+initParams = {
+		@WebInitParam(name = "url",
+					value = "/project/baseball/util/util.properties")
+		})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private Map<String, UserService> map = new HashMap<>();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Controller() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String url = request.getRequestURI();
+		int cmdIdx = url.lastIndexOf("/")+1;
+		String cmd = url.substring(cmdIdx);
+		
+		UserService service = map.get(cmd);
+		NextPage nextPage = service.execute(request, response);
+		
+		if(nextPage == null) {
+			System.out.println("Null을 반환하지마!");
+		}
+		else {
+			if(nextPage.isRedirect()) {
+				System.out.println("다음 페이지로 이동");
+				response.sendRedirect(nextPage.getPageName());
+			}
+			else {
+				request.getRequestDispatcher(nextPage.getPageName()).forward(request,response);
+			}
+		}
 	}
 
 	/**

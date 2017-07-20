@@ -7,7 +7,8 @@ public class SelectAllService implements UserService {
 
 	@Override
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
