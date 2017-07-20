@@ -12,11 +12,11 @@ public class SearchDAO {
 	}
 
 	// ----------------------------------------------
-	public void selectHomeRun() {
+	public void selectStadiumHomeRun() {
 
 	}
 
-	public void selectFoul() {
+	public void selectStadiumFoul() {
 
 	}
 
