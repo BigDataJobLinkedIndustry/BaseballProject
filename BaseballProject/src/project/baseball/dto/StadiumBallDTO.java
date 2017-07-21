@@ -20,7 +20,17 @@ public class StadiumBallDTO {
 	private String HF;
 	private String pNum;
 	
+	
+	//count(seatcode)
+	private int countBallSeatCode;
+	
 	//getter setter
+	public int getCountBallSeatCode() {
+		return countBallSeatCode;
+	}
+	public void setCountBallSeatCode(int countBallSeatCode) {
+		this.countBallSeatCode = countBallSeatCode;
+	}
 	public String getsNum() {
 		return sNum;
 	}
@@ -98,6 +108,12 @@ public class StadiumBallDTO {
 	}
 	public void setpNum(String pNum) {
 		this.pNum = pNum;
+	}
+	
+	public StadiumBallDTO(String bSeatCode, int countBallSeatCode) {
+		super();
+		this.bSeatCode = bSeatCode;
+		this.countBallSeatCode = countBallSeatCode;
 	}
 	//toString
 	@Override

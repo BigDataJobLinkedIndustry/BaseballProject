@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
@@ -30,24 +32,7 @@
 <style>
 footer{background-color : gold;}
 </style>
-<script src="./js/jquery-3.2.1.js"></script>
 
-<script type="text/javascript">
-
-	$(function(){
-		
-		var input = $('#name_input');
-		input.focus(function(){	});
-		
-		input.blur(function(){
-			input.val('선수 이름');
-		});
-		
-		
-		
-	});
-	
-</script>	
 </head>
 
 <body>
@@ -82,9 +67,13 @@ footer{background-color : gold;}
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h2> Search </h2>
-	    <input id = "name_input" name="name" value="선수 이름"> <a href = "링크걸어야함" ><input type = 'button' value = "search"></a>
+            <form action="./stadiumHomeRunBall.project">
+              <input id = "name_input" name="stadium" value="사직야구장">
+              <%-- <a href = "<%= request.getContextPath() %>/player.project" > --%>
+            <input type = 'submit' value = "search"><!-- </a> -->
+        </form>
             <br><br>
-	<a href="#about" class="btn btn-dark btn-lg"> DOWN </a>
+   <a href="#about" class="btn btn-dark btn-lg"> DOWN </a>
         </div>
     </header>
 
@@ -114,7 +103,7 @@ footer{background-color : gold;}
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-				<image src = "han.png" width = "120" height = "120">
+            <image src = "han.png" width = "120" height = "120">
                             </span>
                                 <h4>
                                     <strong></br> Team vs Team </strong>
@@ -125,7 +114,7 @@ footer{background-color : gold;}
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-				<image src = "han.png" width = "120" height = "120">
+            <image src = "han.png" width = "120" height = "120">
                             </span>
                                 <h4>
                                     <strong></br> Team vs Team </strong>
@@ -136,7 +125,7 @@ footer{background-color : gold;}
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-				<image src = "han.png" width = "120" height = "120">
+            <image src = "han.png" width = "120" height = "120">
                             </span>
                                 <h4>
                                     <strong></br> Team vs Team </strong>
@@ -147,7 +136,7 @@ footer{background-color : gold;}
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
-				<image src = "han.png" width = "120" height = "120">
+            <image src = "han.png" width = "120" height = "120">
                             </span>
                                 <h4>
                                     <strong></br> Team vs Team </strong>
@@ -156,7 +145,7 @@ footer{background-color : gold;}
                             </div>
                         </div>
                     </div>
-	        <a href="#portfolio" class="btn btn-dark btn-lg"> DOWN </a>
+           <a href="#portfolio" class="btn btn-dark btn-lg"> DOWN </a>
                     <!-- /.row (nested) -->
                 </div>
                 <!-- /.col-lg-10 -->

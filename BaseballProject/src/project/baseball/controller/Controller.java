@@ -47,17 +47,19 @@ public class Controller extends HttpServlet {
 		String cmd = url.substring(cmdIdx);
 		
 		UserService service = map.get(cmd);
+		System.out.println(cmd);
 		NextPage nextPage = service.execute(request, response);
 		
 		if(nextPage == null) {
-			System.out.println("Null을 반환하지마!");
+			System.out.println("Return Null. Change it");
 		}
 		else {
 			if(nextPage.isRedirect()) {
-				System.out.println("다음 페이지로 이동");
+				System.out.println("go NextPage");
 				response.sendRedirect(nextPage.getPageName());
 			}
 			else {
+				System.out.println("foward");
 				request.getRequestDispatcher(nextPage.getPageName()).forward(request,response);
 			}
 		}

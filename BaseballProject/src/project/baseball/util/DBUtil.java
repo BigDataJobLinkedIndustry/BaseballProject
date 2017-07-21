@@ -1,7 +1,7 @@
 package project.baseball.util;
 //javadoc
 /**
- * DB ¼­¹ö ¿¬°á °ü¸®ÇÏ´Â Å¬·¡½º(1,2,6)
+ * DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½(1,2,6)
  * @author cse
  *
  */
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 public class DBUtil {
 
 	private static final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
-	private static final String CON_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USER_ID = "project";
+	private static final String CON_URL = "jdbc:oracle:thin:@localhost:1521:DBSERVER";
+	private static final String USER_ID = "project1";
 	private static final String USER_PWD = "1234";
 	
 	static {
@@ -28,8 +28,8 @@ public class DBUtil {
 	}
 	
 	/**
-	 * µ¥ÀÌÅÍº£ÀÌ½º ¼­¹ö ¿¬°áÇÏ´Â ¸Þ¼Òµå
-	 * @return Connection µ¥ÀÌÅÍ º£ÀÌ½º ¿¬°á Á¤º¸ °´Ã¼ ¹ÝÈ¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
+	 * @return Connection ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¯
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
@@ -38,7 +38,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * µ¥ÀÌÅÍ º£ÀÌ½º ¿¬°á½Ã »ç¿ëÇÑ ÀÚ¿ø ÇØÁ¦
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * @param
 	 * @return
 	 * 
