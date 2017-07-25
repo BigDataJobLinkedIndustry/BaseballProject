@@ -1,41 +1,108 @@
 package project.baseball.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import project.baseball.service.NextPage;
+import project.baseball.service.UserService;
+
 /**
  * Servlet implementation class Controller
  */
-@WebServlet("/Controller")
+@WebServlet(value="*.project",
+initParams = {
+      @WebInitParam(name = "url",
+               value = "/project/baseball/util/util.properties")
+      })
 public class Controller extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
+   private Map<String, UserService> map = new HashMap<>();
+   
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Controller() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      String url = request.getRequestURI();
+      int cmdIdx = url.lastIndexOf("/")+1;
+      String cmd = url.substring(cmdIdx);
+      System.out.println("get들어왔다!!!");
+      UserService service = map.get(cmd);
+      NextPage nextPage = service.execute(request, response);
+      
+      if(nextPage == null) {
+         System.out.println("Null을 반환하지마!");
+      }
+      else {
+         if(nextPage.isRedirect()) {
+            System.out.println("다음 페이지로 이동");
+            response.sendRedirect(nextPage.getPageName());
+         }
+         else {
+            request.getRequestDispatcher(nextPage.getPageName()).forward(request,response);
+         }
+      }
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
+   
+   @Override
+   public void init(ServletConfig config) throws ServletException {
+      
+      Properties prop = new Properties();
+      
+      //getClass().getResourceAsStream(config.getInitParameter("url"));
+      
+      try {
+         prop.load(getClass().getResourceAsStream(config.getInitParameter("url")));
+         
+         //System.out.println(prop);         
+         Iterator<Object> it = prop.keySet().iterator();
+         
+         while(it.hasNext()) {
+            String key = (String) it.next();
+            
+            Class clazz = Class.forName(prop.getProperty(key));
+            
+            UserService service = (UserService) clazz.newInstance();
+            
+            map.put(key, service);
+         }
+         
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (InstantiationException e) {
+         e.printStackTrace();
+      } catch (IllegalAccessException e) {
+         e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+      }
+   }
 
 }
